@@ -1,2 +1,3 @@
 #!/bin/sh
-irb -r "$(test -h "$0" && readlink "$0" | xargs dirname || dirname "$0")/lib/rtysh.rb"
+instdir="$(test -h "$0" && readlink "$0" | xargs dirname || dirname "$0")"
+IRBRC="$instdir/irb.rc" irb -r "$instdir/lib/rtysh.rb"
