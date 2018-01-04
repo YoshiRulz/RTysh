@@ -1,2 +1,2 @@
 #!/bin/sh
-irb -r "$(test -h "$0" && readlink "$0" || printf %s "$0" | xargs dirname)/lib/rtysh.rb"
+irb -r "$(test -h "$0" && readlink "$0" | xargs dirname || dirname "$0")/lib/rtysh.rb"
