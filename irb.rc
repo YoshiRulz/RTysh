@@ -1,0 +1,28 @@
+require "irb/completion"
+require "colorize"
+
+$RTYSH_IRB_PROMPT = [
+	%x{id -nu}.chomp.sub("yoshi", "♥Ԑ═З").colorize(:green) + "@".colorize(:white) +
+	%x{hostname}.chomp.sub("yoshi-", "").colorize(:magenta) + ":".colorize(:white) +
+	"%.".colorize(:cyan) + "]r$> ".colorize(:red),
+
+	# Prefix and suffix for PROMPT_C and PROMPT_S
+	" #{" ".colorize(:cyan)[0..9]}%02i #{" ".colorize(:red)[0..9]}",
+	"\\> #{" ".colorize(:red)[11..14]}",
+
+	# Home dir
+	%x{printf $HOME}
+]
+IRB.conf[:PROMPT][:RTYSH_PROMPT] = {
+	PROMPT_I: $RTYSH_IRB_PROMPT[0].tap { |s|
+		def s.dup
+			d = Dir.pwd
+			d.sub!($RTYSH_IRB_PROMPT[3], "~") if d.start_with? $RTYSH_IRB_PROMPT[3]
+			sub("%.", d)
+		end
+	},
+	PROMPT_C: "#{$RTYSH_IRB_PROMPT[1]}.#{$RTYSH_IRB_PROMPT[2]}",
+	PROMPT_S: "#{$RTYSH_IRB_PROMPT[1]}%l#{$RTYSH_IRB_PROMPT[2]}",
+	RETURN: "%s\n"
+}
+IRB.conf[:PROMPT_MODE] = :RTYSH_PROMPT
