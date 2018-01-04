@@ -2,8 +2,8 @@ require "irb/completion"
 require "colorize"
 
 $RTYSH_IRB_PROMPT = [
-	%x{id -nu}.chomp.sub("yoshi", "♥Ԑ═З").colorize(:green) + "@".colorize(:white) +
-	%x{hostname}.chomp.sub("yoshi-", "").colorize(:magenta) + ":".colorize(:white) +
+	%x{id -nu}.chomp.sub("yoshi", "♥Ԑ═З").colorize(:green) + "@".colorize(:light_white) +
+	%x{hostname}.chomp.sub("yoshi-", "").colorize(:magenta) + ":".colorize(:light_white) +
 	"%.".colorize(:cyan) + "]r$> ".colorize(:red),
 
 	# Prefix and suffix for PROMPT_C and PROMPT_S
