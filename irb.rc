@@ -29,3 +29,11 @@ IRB.conf[:PROMPT_MODE] = :RTYSH_PROMPT
 
 IRB.conf[:HISTORY_FILE] = "~/.rtysh_history"
 IRB.conf[:SAVE_HISTORY] = 2500
+
+IRB.conf[:TEMP] = "#{ENV["HOME"]}/.rtyrc"
+if File.exist? IRB.conf[:TEMP]
+	load IRB.conf[:TEMP]
+else
+	load IRB.conf[:TEMP] if File.exist? IRB.conf[:TEMP].sub!("rty", "irb")
+end
+IRB.conf.delete :TEMP
