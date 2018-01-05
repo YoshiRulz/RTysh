@@ -26,3 +26,6 @@ IRB.conf[:PROMPT][:RTYSH_PROMPT] = {
 	RETURN: "%s\n"
 }
 IRB.conf[:PROMPT_MODE] = :RTYSH_PROMPT
+
+IRB.conf[:HISTORY_FILE] = "~/.rtysh_history"
+IRB.conf[:SAVE_HISTORY] = 2500
